@@ -1,0 +1,18 @@
+body {
+    background-image: url(../../img/bg.webp);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+ul,
+li {
+    list-style: none;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: rgb(255, 255, 255);
+    text-transform: uppercase;
+}

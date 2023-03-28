@@ -1,0 +1,39 @@
+.contacts {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    padding: 30px 15px;
+    border-radius: 2px;
+    background-color: rgba(45, 45, 45, 0.436);
+}
+
+.contact__list {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.contact__item {
+    display: block;
+    min-width: 140px;
+}
+
+.contacts__button {
+    display: block;
+    min-width: 64px;
+    padding: 2px 6px;
+    border: none;
+    border-radius: 2px;
+    color: rgb(245, 246, 246);
+    background-color: rgba(47, 113, 255, 0.64);
+    margin-left: 15px;
+}
+
+.contacts__button:hover,
+.contacts__button:focus {
+    background-color: rgba(245, 246, 246, 0.352);
+    color: rgb(0, 0, 0);
+}
