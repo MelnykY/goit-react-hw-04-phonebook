@@ -1,72 +1,75 @@
-import { Component } from 'react';
+import { useState } from 'react';
+import PropTypes from 'prop-types';
 import { nanoid } from 'nanoid';
 import css from './ContactForm.module.css';
 
-class ContactForm extends Component {
-  state = {
-    name: '',
-    number: '',
+const ContactForm = ({onSubmit}) => {
+  const [name, setName] = useState('');
+  const [number, setNumber] = useState('');
+
+  const nameInputId = nanoid();
+  const numberInputId = nanoid();
+
+  const handleChangeName = e => {
+    const { value } = e.target;
+    setName(value);
   };
 
-  nameInputId = nanoid();
-  numberInputId = nanoid();
-
-  handleChange = e => {
-    const { name, value } = e.target;
-    this.setState({ [name]: value });
+  const handleChangeNumber = e => {
+    const { value } = e.target;
+    setNumber(value);
   };
 
-  handleSubmit = e => {
+  const handleSubmit = e => {
     e.preventDefault();
-    const { name, number } = this.state;
-    this.props.onSubmit(name, number);
-    this.reset();
+    onSubmit(name, number);
+    reset();
   };
 
-  reset = () => {
-    this.setState({
-      name: '',
-      number: '',
-    });
+  const reset = () => {
+    setName('');
+    setNumber('');
   };
 
-  render() {
-    return (
-      <form className={css.form} onSubmit={this.handleSubmit}>
-        <label className={css.form__label} htmlFor={this.nameInputId}>
-          Name
-          <input
-            value={this.state.name}
-            className={css.form__input}
-            onChange={this.handleChange}
-            type="text"
-            name="name"
-            pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-            id={this.nameInputId}
-            placeholder=""
-          />
-        </label>
-        <label className={css.form__label} htmlFor={this.numberInputId}>
-          Number
-          <input
-            id={this.numberInputId}
-            value={this.state.number}
-            className={css.form__input}
-            onChange={this.handleChange}
-            type="tel"
-            name="number"
-            pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-            title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-            required
-            placeholder=""
-          />
-        </label>
-        <button className={css.form__button} type="submit">
-          Add contact
-        </button>
-      </form>
-    );
-  }
-}
+  return (
+    <form className={css.form} onSubmit={handleSubmit}>
+      <label className={css.form__label} htmlFor={nameInputId}>
+        Name
+        <input
+          value={name}
+          className={css.form__input}
+          onChange={handleChangeName}
+          type="text"
+          name="name"
+          pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+          id={nameInputId}
+          placeholder=""
+        />
+      </label>
+      <label className={css.form__label} htmlFor={numberInputId}>
+        Number
+        <input
+          id={numberInputId}
+          value={number}
+          className={css.form__input}
+          onChange={handleChangeNumber}
+          type="tel"
+          name="number"
+          pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+          title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+          required
+          placeholder=""
+        />
+      </label>
+      <button className={css.form__button} type="submit">
+        Add contact
+      </button>
+    </form>
+  );
+};
+
+ContactForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+};
 
 export default ContactForm;
